@@ -15,5 +15,16 @@ include_once 'inc/Message.php';
 $database = new Database();
 $message = new Message($database);
 
-$entities = $message->readEntries($instance, $date);
-echo json_encode($entities);
+$entities = $message->getEntries($instance, $date);
+
+if (!empty($entities)) {
+    echo json_encode($entities);
+} else {
+    $nextDate= $message->getNextDate($instance, $date);
+
+    $result = array(
+        'message' => "No entries found.",
+        'next_date' => $nextDate,
+    );
+    echo json_encode($result);
+}
