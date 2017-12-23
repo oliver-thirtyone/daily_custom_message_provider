@@ -23,7 +23,7 @@ if (!empty($entities)) {
     $nextDate= $message->getNextDate($instance, $date);
 
     $result = array(
-        'message' => "No entries found.",
+        'error' => "No entries found.",
         'next_date' => $nextDate,
     );
     echo json_encode($result);
