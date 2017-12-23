@@ -53,7 +53,7 @@ class Message {
         $statement->execute();
 
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-            return [$row['date']];
+            return $row['date'];
         }
         return null;
     }
