@@ -1,0 +1,8 @@
+# Deny access to .htaccess
+<FilesMatch ".*">
+    Order allow, deny
+    Deny from all
+</FilesMatch>
+
+# Disable directory browsing
+Options -Indexes
