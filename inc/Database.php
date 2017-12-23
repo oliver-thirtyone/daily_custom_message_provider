@@ -19,7 +19,7 @@ class Database {
     public function getConnection() {
         if (!isset($this->connection)) {
             try {
-                $this->connection = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+                $this->connection = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->name, $this->user, $this->password);
                 $this->connection->exec("set names utf8");
             } catch (PDOException $exception) {
                 echo "Connection error: " . $exception->getMessage();
