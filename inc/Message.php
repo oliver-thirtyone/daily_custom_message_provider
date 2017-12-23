@@ -19,11 +19,23 @@ class Message {
 
         $statement = $this->database->getConnection()->prepare($query);
 
-        $this->database->prepare($statement, ":instance_name", $instance);
-        $this->database->prepare($statement, ":message_date", $date);
+        $this->database->prepare($statement, ':instance_name', $instance);
+        $this->database->prepare($statement, ':message_date', $date);
 
         $statement->execute();
-        return $statement->fetchAll();
+
+        $entries = array();
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)){
+            $entry = array(
+                'id' => $row['pk'],
+                'entry' => $row['entry'],
+                'type' => $row['type'],
+                'sorting' => $row['sorting']
+            );
+            array_push($entries, $entry);
+        }
+
+        return $entries;
     }
 
 }
